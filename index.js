@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown')
 // TODO: Create an array of questions for user input
-const questions = ["What is the name of your Project?", "Please describe this project", "How do you install this application?","Please describe how to use this project", "How can others contribute?", "Please provide examples of Tests:", "What type of license would you like to add?(Select One)", "Please enter your GitHub username", "Please enter your email address"];
+const questions = ["What is the name of your Project?(Required)", "Please describe this project(Required)", "How do you install this application?(Required)","Please describe how to use this project(Required)", "How can others contribute?", "Please provide examples of Tests:", "What type of license would you like to add?(Select One)", "Please enter your GitHub username(Required)", "Please enter your email address(Required)"];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
@@ -14,21 +14,49 @@ function init() {
     return inquirer.prompt ([{
         type: 'input',
         name: "title",
-        message: title
+        message: title,
+        validate: titleInput => {
+            if(titleInput) {
+                return true;
+            } else {
+                console.log('Please enter the name of your project!')
+            };
+        }
     },
     {
         type: 'input',
         name: "projectDesc",
-        message: description
+        message: description,
+        validate: projectDescInput => {
+            if(projectDescInput) {
+                return true;
+            } else {
+                console.log('Please describe this project!')
+            };
+        }
     },{
         type: 'input',
         name: "install",
-        message: install
+        message: install,
+        validate: installInput => {
+            if(installInput) {
+                return true;
+            } else {
+                console.log('Please describe how to install this project')
+            };
+        }
     },
     {
         type: 'input',
         name: "usage",
-        message: usage
+        message: usage,
+        validate: usageInput => {
+            if(usageInput) {
+                return true;
+            } else {
+                console.log('This field cannot be blank!')
+            };
+        }
     },
     {
         type: 'input',
@@ -49,16 +77,32 @@ function init() {
     {
         type: 'input',
         name: "github",
-        message: username
+        message: username,
+        validate: usernameInput => {
+            if(usernameInput) {
+                return true;
+            } else {
+                console.log('Please enter your GitHub username!')
+            };
+        }
     },
     {
         type: 'input',
         name: "email",
-        message: email
+        message: email,
+        validate: emailInput => {
+            if(emailInput) {
+                return true;
+            } else {
+                console.log('Please enter your email!')
+            };
+        }
     }
-]);
+    
+])
 
 }
 
 // Function call to initialize app
-init();
+init()
+.then(answers => console.log(answers));
