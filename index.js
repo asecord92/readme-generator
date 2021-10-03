@@ -1,11 +1,19 @@
 // TODO: Include packages needed for this application
+const fs = require('fs')
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown')
+
+const fileName = require('./utils/page-template')
+
 // TODO: Create an array of questions for user input
 const questions = ["What is the name of your Project?(Required)", "Please describe this project(Required)", "How do you install this application?(Required)","Please describe how to use this project(Required)", "How can others contribute?", "Please provide examples of Tests:", "What type of license would you like to add?(Select One)", "Please enter your GitHub username(Required)", "Please enter your email address(Required)"];
 
+
+
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    
+}
 
 // TODO: Create a function to initialize app
 function init() {
@@ -105,4 +113,13 @@ function init() {
 
 // Function call to initialize app
 init()
-.then(answers => console.log(answers));
+.then(answers=> {
+const pageHTML = fileName(answers)
+fs.writeFile('./readme.md', pageHTML, err => {
+    if (err) throw new Error(err);
+
+    console.log('ReadMe successfully created!')
+})})
+
+
+
