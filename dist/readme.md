@@ -1,7 +1,7 @@
-# test
+# ReadMe Generator
 
   ## Description
-  test
+  Application that generates a readme from the commandline!
   ## Table of Contents
 
   * [Installation](#installation)
@@ -15,16 +15,13 @@
 
   ## Usage
 
-  t
+  Run from the command line in order to generate a readme given a template.
 
   ## Credits
 
-  t
+  n/a
 
   
-## Tests
-
-t
 
   
   ## License
@@ -37,7 +34,7 @@ t
 
   ## Questions
 
-  Find a link to the full repository at https://github.com/tt
+  Find a link to the full repository at https://github.com/asecord92
 
-  For further questions please contact me at [t](mailto:t)
+  For further questions please contact me at [ats92@cox.net](mailto:ats92@cox.net)
 
