@@ -3,7 +3,9 @@
 function renderLicenseBadge(license) {
   if(!license) {
     return '';
-  }
+  };
+  return `
+ ![License](https://img.shields.io/badge/licenseName-${license}-blue.svg)`
 }
 
 // TODO: Create a function that returns the license link
@@ -12,6 +14,8 @@ function renderLicenseLink(license) {
   if(!license) {
     return '';
   }
+
+  return `[Learn More about ${license}](https://choosealicense.com/licenses/${license})`
 }
 
 // TODO: Create a function that returns the license section of README
@@ -19,7 +23,13 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {
   if(!license) {
     return '';
-  }
+  };
+  return `
+  ## License
+  
+  ${renderLicenseBadge(license)}
+
+  ${renderLicenseLink(license)}`
 }
 
 function testSection(test){
@@ -27,7 +37,7 @@ function testSection(test){
     return '';
 };
 return `
-##Tests
+## Tests
 
 ${test}`
 }
@@ -42,13 +52,13 @@ function generateMarkdown(answers) {
   ## Table of Contents
 
   * [Installation](#installation)
-  * [Usage] (#usage)
+  * [Usage](#usage)
   * [Credits](#credits)
   * [License](#license)
   
   ## Installation
-
-  ${answers.install}
+  
+          ${answers.install}
 
   ## Usage
 
@@ -60,14 +70,17 @@ function generateMarkdown(answers) {
 
   ${testSection(answers.test)}
 
+  ${renderLicenseSection(answers.license)}
+
 
   ## Questions
 
   Find a link to the full repository at https://github.com/${answers.github}
 
-  For further questions please contat me at ${answers.email}
+  For further questions please contact me at [${answers.email}](mailto:${answers.email})
 
 `
+
 }
 
 module.exports = generateMarkdown;

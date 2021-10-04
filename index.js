@@ -3,10 +3,8 @@ const fs = require('fs')
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown')
 
-const fileName = require('./utils/page-template')
-
 // TODO: Create an array of questions for user input
-const questions = ["What is the name of your Project?(Required)", "Please describe this project(Required)", "How do you install this application?(Required)","Please describe how to use this project(Required)", "How can others contribute?", "Please provide examples of Tests:", "What type of license would you like to add?(Select One)", "Please enter your GitHub username(Required)", "Please enter your email address(Required)"];
+const questions = ["What is the name of your Project?(Required)", "Please describe this project(Required)", "How do you install this application?(Required)","Please describe how to use this project(Required)", "How can others contribute?(Required)", "Please provide examples of Tests:", "What type of license would you like to add?(Select One)", "Please enter your GitHub username(Required)", "Please enter your email address(Required)"];
 
 
 
@@ -73,7 +71,14 @@ function init() {
     {
         type: 'input',
         name: "contributer",
-        message: contribute
+        message: contribute,
+        validate: contributerInput => {
+            if(contributerInput) {
+                return true;
+            } else {
+                console.log('This field cannot be blank!')
+            };
+        }
     },
     {
         type: 'input',
@@ -81,10 +86,10 @@ function init() {
         message: tests
     },
     {
-        type: 'checkbox',
+        type: 'list',
         name: "license",
         message: license,
-        choices: ["MIT", "GNU GPLv3", "MPL 2.0", "Apache 2.0", "Boost 1.0","Unlicense"]
+        choices: ["mit","unlicense"]
     },
     {
         type: 'input',
@@ -113,13 +118,11 @@ function init() {
     
 ])
 
-// .then(writeToFile('readme.me', answers));
-
 }
 
 // Function call to initialize app
 init()
 .then(answers => generateMarkdown(answers))
-.then(pageLayout => writeToFile('readme.md', pageLayout))
+.then(pageLayout => writeToFile('./dist/readme.md', pageLayout))
 
 
