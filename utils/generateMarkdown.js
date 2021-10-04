@@ -22,11 +22,52 @@ function renderLicenseSection(license) {
   }
 }
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+function testSection(test){
+  if(!test) {
+    return '';
+};
+return `
+##Tests
 
-`;
+${test}`
+}
+
+
+// TODO: Create a function to generate markdown for README
+function generateMarkdown(answers) {
+  return `# ${answers.title}
+
+  ## Description
+  ${answers.projectDesc}
+  ## Table of Contents
+
+  * [Installation](#installation)
+  * [Usage] (#usage)
+  * [Credits](#credits)
+  * [License](#license)
+  
+  ## Installation
+
+  ${answers.install}
+
+  ## Usage
+
+  ${answers.usage}
+
+  ## Credits
+
+  ${answers.contributer}
+
+  ${testSection(answers.test)}
+
+
+  ## Questions
+
+  Find a link to the full repository at https://github.com/${answers.github}
+
+  For further questions please contat me at ${answers.email}
+
+`
 }
 
 module.exports = generateMarkdown;
